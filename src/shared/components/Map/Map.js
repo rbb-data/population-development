@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import 'leaflet/dist/leaflet.css'
+import Choropleth from 'react-leaflet-choropleth'
 import { Map as LeafletMap, ZoomControl, GeoJSON } from 'react-leaflet'
 import { BingLayer } from 'react-leaflet-bing'
 
@@ -9,6 +10,8 @@ import berlinMask from '../../data/berlin.geo.json'
 import berlinBoroughs from '../../data/berlin-bezirke.geo.json'
 import { darkGrey } from '../../styles/colors.sass'
 import _ from './Map.module.sass'
+
+import data from '../../../data/population_berlin_dummy.geo.json'
 
 // TODO:
 // add brandenburg as option
@@ -73,6 +76,15 @@ const Map = props => {
   const beigeStyle = 'trs|lv:true;fc:dfded2_pp|lv:false;v:false_ar|v:false;lv:false_vg|v:true_wt|lv:false;fc:86c6ed_rd|fc:ECEADD;sc:D4CDB9;lv:false_mr|fc:ECEADD;lv:true_hg|lv:false_g|lc:dfded2'
   const mapClassName = `${className} ${_.map}`
 
+	const style = {
+    fillColor: '#F28F3B',
+    weight: 1,
+    opacity: 1,
+    color: 'black',
+    dashArray: '3',
+    fillOpacity: 0.5
+	}
+
   return <LeafletMap className={mapClassName} {...mapProps} {...forwardedProps}>
     <BingLayer
       type='CanvasGray'
@@ -95,6 +107,16 @@ const Map = props => {
       weight={0.3}
       fillOpacity={0}
       color={darkGrey} />
+
+		<Choropleth
+      data={{type: 'FeatureCollection', features: data.features}}
+      valueProperty={(feature) => feature.properties.Schluessel_gesamt}
+      scale={['#000', '#fff']}
+      steps={7}
+      mode='e'
+      style={style}
+      onEachFeature={(feature, layer) => layer.bindPopup(feature.properties.Gemeinde_name)}
+    />
 
     {/* <Rectangle bounds={mapProps.bounds} /> */}
 
