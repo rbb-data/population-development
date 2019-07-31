@@ -47,7 +47,7 @@ function App (props) {
   if (markers.length === 0) return null
 
   return <div className={_.app}>
-    <div className={_.filter}>
+    {/* <div className={_.filter}>
       <label htmlFor='vendorSelector'>Anbieter:</label>
       <TabBar id='vendorSelector'
         title='Anbieter auswählen'
@@ -59,7 +59,7 @@ function App (props) {
 
           track(`select vendor: ${vendor}`)
         }} />
-    </div>
+    </div> */}
     <div className={_.mapWrapper}>
       <Map
         bingKey={process.env.REACT_APP_BING_KEY}
@@ -67,7 +67,7 @@ function App (props) {
 
         {/* <Markers markers={filteredByHour} /> */}
         {/* <TileMarkers features={filteredByHour} /> */}
-        <ClusteredMarkers markers={filteredByHour} />
+        {/* <ClusteredMarkers markers={filteredByHour} /> */}
 
       </Map>
     </div>

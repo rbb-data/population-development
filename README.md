@@ -1,4 +1,4 @@
-# e schooter map
+# Population development in Berlin
 This project is forked from [rbb starter](https://github.com/rbb-data/starter)  
 which was bootstrapped from [Create React App](https://github.com/facebook/create-react-app).
 
