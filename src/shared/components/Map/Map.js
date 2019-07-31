@@ -7,7 +7,8 @@ import { BingLayer } from 'react-leaflet-bing'
 
 import track from '../../../lib/tracking'
 import berlinMask from '../../data/berlin.geo.json'
-import berlinBoroughs from '../../data/berlin-bezirke.geo.json'
+// import berlinBoroughs from '../../data/berlin-bezirke.geo.json'
+import berlinLORs from '../../data/lor_planungsraeume.geo.json'
 import { darkGrey } from '../../styles/colors.sass'
 import _ from './Map.module.sass'
 
@@ -100,11 +101,19 @@ const Map = props => {
       color='white'
       stroke={false} />
 
-    <GeoJSON
+    {/* <GeoJSON
       data={berlinBoroughs}
       interactive={false}
       opacity={1}
       weight={0.3}
+      fillOpacity={0}
+      color={darkGrey} /> */}
+
+		<GeoJSON
+      data={berlinLORs}
+      interactive={false}
+      opacity={1}
+      weight={0.8}
       fillOpacity={0}
       color={darkGrey} />
 
