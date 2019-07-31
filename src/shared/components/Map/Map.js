@@ -8,11 +8,12 @@ import { BingLayer } from 'react-leaflet-bing'
 import track from '../../../lib/tracking'
 import berlinMask from '../../data/berlin.geo.json'
 // import berlinBoroughs from '../../data/berlin-bezirke.geo.json'
-import berlinLORs from '../../data/lor_planungsraeume.geo.json'
-import { darkGrey } from '../../styles/colors.sass'
+// import berlinLORs from '../../data/lor_planungsraeume.geo.json'
+// import { darkGrey } from '../../styles/colors.sass'
 import _ from './Map.module.sass'
 
-import data from '../../data/lor_planungsraeume.geo.json'
+// import data from '../../data/lor_planungsraeume.geo.json'
+import data from '../../data/population-development.geo.json'
 
 // TODO:
 // add brandenburg as option
@@ -78,12 +79,10 @@ const Map = props => {
   const mapClassName = `${className} ${_.map}`
 
 	const style = {
-    fillColor: '#F28F3B',
     weight: 1,
-    opacity: 1,
+    opacity: 0.8,
     color: 'black',
-    dashArray: '3',
-    fillOpacity: 0.5
+    fillOpacity: 0.7
 	}
 
   return <LeafletMap className={mapClassName} {...mapProps} {...forwardedProps}>
@@ -119,12 +118,12 @@ const Map = props => {
 
 		<Choropleth
       data={{type: 'FeatureCollection', features: data.features}}
-      valueProperty={(feature) => feature.properties[2001]}
-      scale={['#000', '#fff']}
-      steps={7}
-      mode='e'
+      valueProperty={(feature) => feature.properties.years['2001']}
+      scale={['white', 'black']}
+      steps={20}
+      mode='q'
       style={style}
-      onEachFeature={(feature, layer) => layer.bindPopup(feature.properties.PLRNAME)}
+			onEachFeature={(feature, layer) => layer.bindPopup(`${feature.properties.PLRNAME} ${feature.properties.years['2018']}`)}
     />
 
     {/* <Rectangle bounds={mapProps.bounds} /> */}
