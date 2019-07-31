@@ -12,7 +12,7 @@ import berlinLORs from '../../data/lor_planungsraeume.geo.json'
 import { darkGrey } from '../../styles/colors.sass'
 import _ from './Map.module.sass'
 
-import data from '../../../data/population_berlin_dummy.geo.json'
+import data from '../../data/lor_planungsraeume.geo.json'
 
 // TODO:
 // add brandenburg as option
@@ -109,22 +109,22 @@ const Map = props => {
       fillOpacity={0}
       color={darkGrey} /> */}
 
-		<GeoJSON
+		{/* <GeoJSON
       data={berlinLORs}
       interactive={false}
       opacity={1}
       weight={0.8}
       fillOpacity={0}
-      color={darkGrey} />
+      color={darkGrey} /> */}
 
 		<Choropleth
       data={{type: 'FeatureCollection', features: data.features}}
-      valueProperty={(feature) => feature.properties.Schluessel_gesamt}
+      valueProperty={(feature) => feature.properties[2001]}
       scale={['#000', '#fff']}
       steps={7}
       mode='e'
       style={style}
-      onEachFeature={(feature, layer) => layer.bindPopup(feature.properties.Gemeinde_name)}
+      onEachFeature={(feature, layer) => layer.bindPopup(feature.properties.PLRNAME)}
     />
 
     {/* <Rectangle bounds={mapProps.bounds} /> */}
